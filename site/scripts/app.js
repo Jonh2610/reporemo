@@ -15,8 +15,18 @@ modulo1.controller("mainCtrl",[
 		 {title: "Post 6", upvotes:5}];
 
 		 //Metodo del controlador
-		 $scope.addPost = function(){;
-		     $scope.posts.push({title:"Nuevo Post", upvotes: 0});
+		 $scope.addPost = function(){
+             if (!$scope.title || $scope.title === "") {
+
+             	alert("No se permite agregar posts vacios")
+             	return;
+             }
+
+		     $scope.posts.push(
+		     	{title: $scope.title, 
+		     	upvotes: 0});
+
+		     $scope.title="";
 
 };
 	}]);

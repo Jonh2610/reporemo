@@ -1,4 +1,4 @@
-console.log ("#Gama: Cargo app.js");
+console.log ("#Jonh: Cargo app.js");
 var modulo1=
 	angular.module("reeditgam",[]);
 modulo1.controller("mainCtrl",[
@@ -23,10 +23,20 @@ modulo1.controller("mainCtrl",[
              }
 
 		     $scope.posts.push(
-		     	{title: $scope.title, 
-		     	upvotes: 0});
+		     	{title: $scope.title,
+		     	link: $scope.link,
+		     	upvotes: 0
+		     });
 
 		     $scope.title="";
+		     $scope.link="";
 
 };
+       //metodo que incrementa el voto 
+       //de un posts en una unidad 
+       $scope.incrementUpvotes = function (post){
+
+       	post.upvotes +=1;
+       };
+
 	}]);

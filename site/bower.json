@@ -2,12 +2,12 @@
   "name": "prueba",
   "version": "1.0.0",
   "authors": [
-    "gamaliellobato <gamaliellobato@gmail.com>"
+    "Jonathan <angel.archundia2610@gmail.com>"
   ],
   "description": "paw",
   "main": "index.html",
   "license": "MIT",
-  "homepage": "www.gamaliel.com",
+  "homepage": "www.google.com",
   "private": true,
   "ignore": [
     "**/.*",

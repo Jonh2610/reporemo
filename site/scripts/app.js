@@ -4,19 +4,26 @@ console.log ("#Jonh: Cargo app.js");
 //Del modulo
 
 var modulo1 = 
-	angular.module("reeditgam",['ui.router']);  // INYECTANDO EL MODULO DEL UI.ROUTER COMO PARAMETRO DEL ARREGLO DE OBJETOS DEL MODULO.
+	angular.module("reeditgam",['ui.router','hSweetAlert']);  // INYECTANDO EL MODULO DEL UI.ROUTER COMO PARAMETRO DEL ARREGLO DE OBJETOS DEL MODULO.
 	// CONFIGURANDO LAS RUTAS.
 	// RECIVE UN ARREGLO DE ELEMENTOS.
 	modulo1.config(['$stateProvider',
 		'$urlRouterProvider',
 		function($stateProvider,$urlRouterProvider){
 			//INICIANDO RUTINA DE CONFIGURACION.
+			//Creando ruta home
 			$stateProvider.state('home',{
 				//DEFINIENDO ESTADO COMO UN OBJETO .
 				url:"/home",// URL QUE DEFINE EL ESTADO.
 				//PLANTILLA BASE PARA EL ESTADO.
 				templateUrl: "/home.html",
-				controller:'mainCtrl'
+				controller:"mainCtrl"
+			});
+			//Creando ruta de visualizacion de post
+			$stateProvider.state('posts',{
+				url: "/posts/{id}",
+				templateUrl: "/posts.html",
+				controller: "postsCtrl"
 			});
 			// URL POR DEFECTO 
 			$urlRouterProvider.otherwise('home');
@@ -49,9 +56,10 @@ var modulo1 =
 
 	//CREANDO CONTROLADOR
 	//DEPENDENCY INJECTION
+	//Creando controlador mainCtrl
 modulo1.controller("mainCtrl",[
-	'$scope','posts', //INYECTANDO FACTORY POST
-	function($scope,posts){
+	'$scope','posts','sweet', //INYECTANDO FACTORY POST
+	function($scope,posts,sweet){
 		$scope.test = "Hola Angular";
 		//MODELO AL CUAL SE LE ASIGNA EL RESULTADO DEL FACTORY
 		$scope.posts = posts.posts;
@@ -60,7 +68,7 @@ modulo1.controller("mainCtrl",[
 		$scope.addPost = function() {
 			if(!$scope.title || $scope.title === "")
 			{
-				alert("NO se permite postear titulos vacios")
+				sweet.show("NO se permite postear titulos vacios")
 				return;
 			}
 			$scope.posts.push(
@@ -78,3 +86,15 @@ modulo1.controller("mainCtrl",[
 			post.upvotes +=1;
 		};
 	}]);
+	
+//Creando controlador postsCtrl
+modulo1.controlador("postsCtrl",[
+	'$scope',
+	'$stateParams',
+	'posts'],function ($scope, $stateParams, posts){
+		//Cuerpo del controlador
+
+	});
+
+
+

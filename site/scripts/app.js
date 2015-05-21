@@ -1,5 +1,4 @@
-console.log ("#Jonh: Cargo app.js");
-//Inyectando el modulo de ui-router
+//Inyectando el modulo de ui-routers
 //Como parametro de arreglo de objetos
 //Del modulo
 
@@ -23,7 +22,7 @@ var modulo1 =
 			$stateProvider.state('posts',{
 				url: "/posts/{id}",
 				templateUrl: "/posts.html",
-				controller: "postsCtrl"
+				controller: "postCtrl"
 			});
 			// URL POR DEFECTO 
 			$urlRouterProvider.otherwise('home');
@@ -75,8 +74,17 @@ modulo1.controller("mainCtrl",[
 				{
 					title: $scope.title, 
 					link:  $scope.link,
-				upvotes: 0});
-			//twp.way data binding
+				    upvotes: 0,
+			        comments : [{
+			        	author : "Gustavo",
+			        	body : "Me gusto ese link",
+			        	upvotes : 0 },
+			        	{
+			        		author: "Ricardo",
+			        		body : "Awesome link.",
+			        		upvotes : 2}]
+               });
+			//two.way data binding
 			$scope.title="";
 			$scope.link="";
 
@@ -88,13 +96,19 @@ modulo1.controller("mainCtrl",[
 	}]);
 	
 //Creando controlador postsCtrl
-modulo1.controlador("postsCtrl",[
+modulo1.controller("postCtrl",[
 	'$scope',
 	'$stateParams',
-	'posts'],function ($scope, $stateParams, posts){
+	'posts',
+	function ($scope, $stateParams, posts){
+		$scope.incrementUpvotes = function (comments) {
+			comments.upvotes +=1;
+
+		};
+
 		//Cuerpo del controlador
-
-	});
-
-
-
+		$scope.post = posts.posts[$stateParams.id];
+        // OBTENIENDO EL PARAMETRO  ID DE LOS PARAMETROS
+        // DEL ESTADO DE LA RUTA Y PASANDOLO COMO
+        // ARGUMENTOS AL OBJETO DEL FACTORY   
+	}]);

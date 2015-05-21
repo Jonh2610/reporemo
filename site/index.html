@@ -60,17 +60,50 @@
 					ng-click="incrementUpvotes(post)"></span>
 				{{post.upvotes}}
 				<span style="font-size:20px; margin-left:10px">
+
 					<!-- Agregando los links -->
-					<a ng-show="post.link" href="{{post.link}}">
+					<a ng-show="post.link" 
+					href="{{post.link}}">
 						{{post.title}}	
 					</a>
 					<span ng-hide="post.link">
 						{{post.title}}
 					</span>
 				</span>
+				<span>
+				<a href="#/posts/{{$index}}">
+				comentarios
+				</span>
 			</div>
 	</script>
 
+  <!--CREANDO LA PLANTILLA POST.HTML -->
+   <script type="text/ng-template"
+   id="/posts.html">
+     <div class="page-header">	
+     	<h3>
+     	  <a ng-show="post.link"
+     	   href="{{post.link}}"> 
+
+    	   </a>
+           <span
+           	ng-hide="post.link">
+           {{post.title}}
+           </span>
+
+     	</h3>
+     </div>
+     <div
+       ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+       <span class="glyphicon glyphicon-thumbs-up">
+       
+      </span>
+     {{comment.upvotes}}- por {{comment.author}}
+      <span style="font-size:20px; margin-left:10px;">
+      	{{comment.body}}
+      </span>
+     </div>
+   </script>
 
 	<!-- Cargando Librerias -->
 	<!-- Es buena practica al final -->
